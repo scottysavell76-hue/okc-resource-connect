@@ -1,0 +1,10 @@
+{
+  "name": "OKC Resource Connect",
+  "short_name": "OKC Resources",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f4f1e9",
+  "theme_color": "#173331",
+  "description": "Low-data OKC resource directory for housing instability and homelessness.",
+  "icons": []
+}
