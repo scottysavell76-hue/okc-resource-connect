@@ -142,5 +142,40 @@ window.deleteContact=id=>{if(confirm("Delete this saved contact from this phone?
 fetch("resources.json").then(r=>r.json()).then(x=>{resources=x;renderCats();render()});
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
+ <footer style="margin-top:40px;padding:30px 20px;text-align:center;background:#f7f7f5;border-top:1px solid #d8d8d2;color:#39434a;">
+  <div style="max-width:700px;margin:0 auto;">
+
+    <h2 style="margin:0 0 8px;font-size:20px;color:#173331;">
+      OKC Resource Connect™
+    </h2>
+
+    <p style="margin:5px 0;font-weight:600;">
+      Developed by Darryl Savell
+    </p>
+
+    <p style="margin:5px 0 18px;">
+      A project of The Epistemic Alliance, Inc.
+    </p>
+
+    <img
+      src="The%2520Epistemic%2520Alliance%2520Logo%2520Banner.png"
+      alt="The Epistemic Alliance"
+      style="max-width:320px;width:80%;height:auto;margin:10px auto 20px;display:block;"
+    >
+
+    <p style="font-size:13px;line-height:1.6;margin:10px auto;">
+      © 2026 Darryl Savell. All rights reserved.
+    </p>
+
+    <p style="font-size:12px;line-height:1.6;max-width:650px;margin:10px auto;color:#5d6669;">
+      OKC Resource Connect is an independently developed community resource
+      directory connecting Oklahoma families with publicly available resources.
+      Organizations listed retain ownership of their respective names,
+      trademarks, logos, content, and services. Listing does not imply
+      endorsement, partnership, or affiliation unless expressly stated.
+    </p>
+
+  </div>
+ </footer>
 </body>
 </html>
