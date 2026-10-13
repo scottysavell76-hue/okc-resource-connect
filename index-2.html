@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173331">
+<meta name="description" content="OKC Resource Connect — Oklahoma community resources, Family Resource Centers and statewide systems of support, plus a private personal contact list.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>OKC Resource Connect</title>
+<style>
+:root{--ink:#173331;--muted:#5d6c69;--bg:#f4f1e9;--card:#fff;--accent:#b56b38;--line:#d9d6ce;--danger:#9e3b32}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:var(--ink);color:#fff;padding:20px 18px 16px;position:sticky;top:0;z-index:5}
+.brand{font-size:24px;font-weight:800}.tag{opacity:.85;font-size:13px;margin-top:3px}
+main{max-width:720px;margin:auto;padding:14px 14px 24px}
+.notice{background:#fff7df;border:1px solid #e5cf8b;border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:13px}
+.emergency{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.emergency a{background:var(--danger);color:#fff;padding:14px;border-radius:14px;text-decoration:none;font-weight:800;text-align:center}
+.emergency a:nth-child(2){background:#5b3a73}
+.search{width:100%;padding:14px;border:1px solid var(--line);border-radius:14px;font-size:16px;margin-bottom:12px;background:#fff}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.tab{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;font-weight:800;color:var(--ink)}.tab.active{background:var(--ink);color:#fff}
+.cats{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.cat{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:13px}.cat.active{background:var(--ink);color:#fff}
+.group-heading{font-size:19px;font-weight:850;margin:24px 0 7px;padding:11px 13px;background:#e5e9e3;border-left:5px solid var(--accent);border-radius:9px;color:var(--ink)}
+.group-heading:first-child{margin-top:8px}.group-count{font-size:12px;font-weight:650;color:var(--muted);margin-left:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 2px 8px #00000008}
+.card h2{font-size:18px;margin:0 0 4px}.sub{font-weight:600;color:var(--accent);font-size:13px}.desc{font-size:14px;line-height:1.45;color:#364743;margin:9px 0}.meta{font-size:12px;color:var(--muted);line-height:1.45}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.actions a,.actions button{border:0;background:var(--ink);color:#fff;text-decoration:none;border-radius:10px;padding:10px 12px;font-weight:700;font-size:13px}.actions .secondary{background:#ece8de;color:var(--ink)}
+.primary{display:block;width:100%;border:0;background:var(--accent);color:#fff;border-radius:13px;padding:14px;font-size:15px;font-weight:800;margin-bottom:12px}
+.form{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}.form h2{margin-top:0}.form label{display:block;font-size:13px;font-weight:700;margin:11px 0 5px}.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}.form textarea{min-height:90px;resize:vertical}.form .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.privacy{font-size:12px;color:var(--muted);line-height:1.45;background:#eef3f0;padding:11px;border-radius:11px;margin-bottom:12px}
+.empty{padding:30px 10px;text-align:center;color:var(--muted)}
+footer{margin-top:28px;background:#fff;border-top:1px solid var(--line);padding:22px 14px;text-align:center;color:var(--muted);font-size:12px;line-height:1.55}
+footer strong{color:var(--ink);font-size:15px}footer .ownership{margin-top:7px}
+.legal-toggle{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#f4f1e9;color:var(--ink);font:inherit;font-weight:750}
+.legal-panel{max-width:680px;margin:14px auto 0;padding:14px;text-align:left;border:1px solid var(--line);border-radius:12px;background:#f9f8f4;color:var(--ink);font-size:13px;line-height:1.55}
+.legal-panel h2{font-size:16px;margin:0 0 8px}.legal-panel p{margin:8px 0}.legal-panel a{color:var(--ink);overflow-wrap:anywhere}
+.hidden{display:none!important}
+.voice-entry{margin:12px 0;border:2px solid var(--ink);border-radius:15px;background:#fff;padding:12px}
+.voice-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border:0;border-radius:12px;background:var(--ink);color:#fff;font-size:16px;font-weight:800}
+.voice-panel{margin-top:12px;padding:14px;background:#eef3f0;border-radius:12px}
+.voice-exit{display:block;width:100%;min-height:54px;margin:0 0 14px;padding:13px;border:2px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);font-size:16px;font-weight:850}
+.voice-panel h2{margin:0 0 6px;font-size:19px}.voice-help{font-size:14px;line-height:1.45;margin:0 0 12px}
+.voice-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.voice-choices button,.voice-controls button{min-height:54px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:12px;font-size:15px;font-weight:750}
+.voice-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.voice-status{font-size:14px;font-weight:650;margin:12px 0 0;min-height:20px}
+.voice-small{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
+</style>
+</head>
+<body>
+<header><div class="brand">OKC Resource Connect</div><div class="tag">Practical help. One tap at a time.</div></header>
+<main>
+<div class="notice"><b>Start here:</b> Call <b>211</b> if you don't know where to go. Resource availability can change, so call ahead when possible.</div>
+<div class="emergency"><a href="tel:911">CALL 911<br><small>Emergency</small></a><a href="tel:988">CALL 988<br><small>Crisis support</small></a></div>
+
+<div class="tabs">
+<button class="tab active" id="resourceTab">Community Resources</button>
+<button class="tab" id="myTab">My People & Services</button>
+</div>
+
+<section class="voice-entry" aria-label="Optional spoken interaction">
+  <button class="voice-toggle" id="voiceToggle" aria-expanded="false" aria-controls="voicePanel">🎙️ Talk to Resource Connect</button>
+  <div id="voicePanel" class="voice-panel hidden">
+    <button type="button" id="voiceExit" class="voice-exit">↩ Return to regular app</button>
+    <h2>Voice & Easy-Tap Help</h2>
+    <p class="voice-help">Say a category or service name to open it. For example, say “shelters,” “sober living,” “OKDHS,” or “SoonerCare.” You can keep using the regular app at any time.</p>
+    <div class="voice-choices">
+      <button type="button" data-voice-topic="food">🍎 Food</button>
+      <button type="button" data-voice-topic="housing rent shelter">🏠 Housing or shelter</button>
+      <button type="button" data-voice-topic="child family childcare">👨‍👩‍👧 Family and children</button>
+      <button type="button" data-voice-topic="health healthcare medical">🩺 Health care</button>
+      <button type="button" data-voice-topic="benefits utilities bills">💡 Benefits and bills</button>
+      <button type="button" data-voice-topic="transportation">🚌 Transportation</button>
+      <button type="button" data-voice-topic="sober living">🏡 Sober living</button>
+      <button type="button" data-voice-topic="OKDHS">📋 OKDHS benefits</button>
+      <button type="button" data-voice-topic="SoonerCare">🩺 SoonerCare</button>
+    </div>
+    <div class="voice-controls">
+      <button type="button" id="voiceListen">🎤 Speak what you need</button>
+      <button type="button" id="voiceRead">🔊 Read results aloud</button>
+      <button type="button" id="voice211">☎️ Hear about 2-1-1</button>
+      <button type="button" id="voiceStop">⏹ Stop speaking</button>
+    </div>
+    <p class="voice-status" id="voiceStatus" role="status" aria-live="polite">Voice mode is ready. Choose a topic or use the microphone.</p>
+    <p class="voice-small">Voice input availability depends on your browser and device. Microphone use starts only when you tap the button. Your personal contacts are not included in voice searches.</p>
+  </div>
+</section>
+
+<section id="resourceView">
+<input id="search" class="search" placeholder="Search shelter, food, housing, family centers, systems…" autocomplete="off">
+<div id="cats" class="cats"></div>
+<div id="list"></div>
+</section>
+
+<section id="myView" class="hidden">
+<div class="privacy"><b>Private on this phone.</b> Contacts you add here are stored in this browser on this device. They are not sent to OKC Resource Connect's server. Anyone with access to this phone/browser may still be able to access them. Don't use this area for passwords, Social Security numbers, medical records, or other highly sensitive information.</div>
+<button class="primary" id="addBtn">＋ Add a person or service</button>
+
+<div id="formWrap" class="form hidden">
+<h2 id="formTitle">Add a person or service</h2>
+<input type="hidden" id="editId">
+<label for="name">Name / organization *</label>
+<input id="name" placeholder="Example: Dr. Smith or Legal Aid">
+<label for="type">Type</label>
+<select id="type">
+<option>Doctor / clinic</option><option>Lawyer / legal aid</option><option>Pharmacy</option><option>Caseworker / navigator</option><option>Housing contact</option><option>School / child care</option><option>Employer</option><option>Food resource</option><option>Family / friend</option><option>Other</option>
+</select>
+<div class="row">
+<div><label for="phone">Phone</label><input id="phone" inputmode="tel" placeholder="405-555-1234"></div>
+<div><label for="email">Email</label><input id="email" inputmode="email" placeholder="name@example.org"></div>
+</div>
+<label for="address">Address</label>
+<input id="address" placeholder="Street, city, state">
+<label for="notes">Notes</label>
+<textarea id="notes" placeholder="Hours, appointment date, what they help with, etc."></textarea>
+<div class="actions">
+<button id="saveBtn">Save</button><button class="secondary" id="cancelBtn">Cancel</button>
+</div>
+</div>
+
+<input id="mySearch" class="search" placeholder="Search my contacts…" autocomplete="off">
+<div id="myList"></div>
+</section>
+</main>
+
+<footer>
+<strong>OKC Resource Connect™</strong>
+<div class="ownership">Developed by Darryl Savell</div>
+<div>Community resources verified October 8, 2026. Organizations listed retain ownership of their respective names, trademarks, logos, content and services. Listing does not imply endorsement, partnership or affiliation unless expressly stated.</div>
+<div class="ownership">© 2026 Darryl Savell. All rights reserved.</div>
+<button type="button" class="legal-toggle" id="legalToggle" aria-expanded="false" aria-controls="legalPanel">Legal &amp; About</button>
+<section class="legal-panel hidden" id="legalPanel" aria-label="Legal and About information">
+  <h2>About OKC Resource Connect</h2>
+  <p>OKC Resource Connect is a community resource-finding tool developed by Darryl Savell. It is intended to help people find organizations and services; it is not an emergency service and does not guarantee that a listed service is available or that a person is eligible.</p>
+  <h2>Ownership &amp; intellectual property</h2>
+  <p><strong>© 2026 Darryl Savell. All rights reserved.</strong> This notice applies to original app code and original written or design content owned by Darryl Savell. The app may also include factual information, links, names, marks, or other materials belonging to third parties; those remain the property of their respective owners.</p>
+  <p><strong>OKC Resource Connect™</strong> is a trademark claim by Darryl Savell. The ™ symbol does not mean the mark is federally registered.</p>
+  <p>Unless permitted by law or authorized in writing by the rights holder, do not copy, republish, redistribute, or commercially reuse the app's original code, original written content, or original design elements. This notice does not claim ownership of third-party materials or prevent lawful uses.</p>
+  <h2>Resource accuracy &amp; third-party services</h2>
+  <p>Resource information can change. Confirm current services, eligibility, hours, and availability directly with each organization. Listing a resource does not imply endorsement, partnership, or affiliation.</p>
+  <p><strong>Contact:</strong> For permission requests or questions about original app materials, seek authorization from Darryl Savell before reuse.</p>
+</section>
+</footer>
+
+<script>
+let resources=[], active="All";
+const $=id=>document.getElementById(id);
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function categoriesFromData(){
+  // Categories are generated from resources.json, so every new category automatically
+  // gets a tab and a matching section in the main All Resources list.
+  const cats=[...new Set(resources.map(r=>r.category).filter(Boolean))];
+  const priority=[
+    "Start Here","Emergency","Shelter & Housing","Sober Living & Recovery Housing",
+    "Safety & Domestic Violence","Food & Benefits","Health Care","Health & Health Coverage",
+    "Behavioral Health & Recovery","Benefits & Utilities","Statewide Systems & Navigation",
+    "Family Resource Centers","Child & Family Services","Child Care & Early Childhood",
+    "Youth & Young Adults","Education & Homeless Youth","Disability & Developmental Supports",
+    "Disability & Family Navigation","Systems of Care","Family Support Network",
+    "Transportation","Jobs & Training","Employment & Economic Mobility","Legal Help",
+    "Family & Legal Services","Documents & Stability","Connectivity & Technology",
+    "Street Outreach & City Services","Recovery & Support","Native American & Tribal Resources","Veterans","Pets & Animal Support"
+  ];
+  cats.sort((a,b)=>{
+    const ai=priority.indexOf(a),bi=priority.indexOf(b);
+    if(ai>=0&&bi>=0)return ai-bi;
+    if(ai>=0)return -1;if(bi>=0)return 1;
+    return a.localeCompare(b);
+  });
+  return ["All",...cats];
+}
+function renderCats(){
+  $("cats").innerHTML=categoriesFromData().map(c=>`<button class="cat ${c===active?'active':''}" onclick="setCat('${c.replace(/'/g,"\\'")}')">${esc(c)}</button>`).join("");
+}
+function setCat(c){active=c;renderCats();render()}
+function resourceCard(r){
+ let acts="";
+ if(r.phone) acts+=`<a href="tel:${r.phone.replace(/[^0-9+]/g,"")}">${esc(r.action||"Call")}</a>`;
+ if(r.url) acts+=`<a class="secondary" href="${esc(r.url)}">Open website</a>`;
+ if(r.address) acts+=`<a class="secondary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.address)}">Directions</a>`;
+ return `<article class="card"><div class="sub">${esc(r.category)}</div><h2>${esc(r.title)}</h2><div class="sub">${esc(r.subtitle)}</div><div class="desc">${esc(r.description)}</div>${r.coverage?`<div class="meta"><b>Coverage:</b> ${esc(r.coverage)}</div>`:""}${r.address?`<div class="meta"><b>Address:</b> ${esc(r.address)}</div>`:""}<div class="meta"><b>Verified:</b> ${esc(r.verified)}</div><div class="actions">${acts}${(r.source||r.url)?`<a class="secondary" href="${esc(r.source||r.url)}">Source</a>`:""}</div></article>`;
+}
+function render(){
+ const q=$("search").value.trim().toLowerCase();
+ const matches=resources.filter(r=>(active==="All"||r.category===active)&&(!q||[r.title,r.subtitle,r.description,r.address,r.category,r.coverage,r.keywords].join(" ").toLowerCase().includes(q)));
+ if(!matches.length){$("list").innerHTML=`<div class="empty">No matching resources. Try a broader search or call <b>211</b>.</div>`;return}
+ if(active!=="All"){
+   $("list").innerHTML=matches.map(resourceCard).join("");
+   return;
+ }
+ const cats=categoriesFromData().filter(c=>c!=="All");
+ const groups=cats.map(category=>({category,items:matches.filter(r=>r.category===category)})).filter(group=>group.items.length);
+ $("list").innerHTML=groups.map(group=>`<section class="resource-group" aria-label="${esc(group.category)}"><h2 class="group-heading">${esc(group.category)}<span class="group-count">${group.items.length} ${group.items.length===1?"resource":"resources"}</span></h2>${group.items.map(resourceCard).join("")}</section>`).join("");
+}
+function stopVoiceAndClose(){
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  if(voiceRecognition){try{voiceRecognition.stop()}catch(e){} voiceRecognition=null;}
+  voicePanel.classList.add("hidden");
+  voiceToggle.setAttribute("aria-expanded","false");
+}
+$("resourceTab").onclick=()=>{stopVoiceAndClose();$("resourceTab").classList.add("active");$("myTab").classList.remove("active");$("resourceView").classList.remove("hidden");$("myView").classList.add("hidden")};
+$("myTab").onclick=()=>{stopVoiceAndClose();$("myTab").classList.add("active");$("resourceTab").classList.remove("active");$("myView").classList.remove("hidden");$("resourceView").classList.add("hidden");renderMy()};
+$("search").addEventListener("input",render);
+
+// Optional voice access: speech output plus large touch choices; normal app remains available.
+const voicePanel=$("voicePanel"), voiceToggle=$("voiceToggle"), voiceStatus=$("voiceStatus");
+let voiceRecognition=null;
+function voiceSay(text){
+  if(!("speechSynthesis" in window)){voiceStatus.textContent="Spoken audio is not supported by this browser. You can still use the large on-screen choices.";return}
+  window.speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(text); utterance.lang="en-US"; utterance.rate=0.92;
+  utterance.onerror=()=>{voiceStatus.textContent="Audio could not play. Please try again or use the on-screen choices."};
+  window.speechSynthesis.speak(utterance);
+}
+function voiceSearch(term){
+  $("resourceTab").classList.add("active");$("myTab").classList.remove("active");
+  $("resourceView").classList.remove("hidden");$("myView").classList.add("hidden");
+  const spoken=term.trim().toLowerCase();
+  if(!spoken){
+    voiceStatus.textContent="Please say an organization name or the kind of help you need.";
+    voiceSay("Please say a category, such as shelters or sober living, or the name of an organization.");
+    return;
+  }
+  const normalize=s=>String(s||"").toLowerCase()
+    .replace(/&/g,"and").replace(/[^a-z0-9\s]/g," ")
+    .replace(/\s+/g," ").trim();
+  let phrase=normalize(spoken)
+    .replace(/^(please\s+)?(take me to|go to|open|show me|show|find|search for|i need|i want|look for)\s+/,"")
+    .trim();
+
+  // Exact organization-name matches take priority, including spoken aliases such as OKDHS.
+  const exactOrgMatches=resources.filter(r=>{
+    const names=[r.title,r.subtitle,...String(r.keywords||"").split(",")].map(normalize);
+    return names.some(name=>name && name===phrase);
+  });
+  if(exactOrgMatches.length){
+    showVoiceResourceMatches(exactOrgMatches, exactOrgMatches[0].title, spoken, true);
+    return;
+  }
+
+  // Spoken category names and common synonyms navigate directly to that category.
+  const categoryIntents=[
+    {category:"Sober Living & Recovery Housing", aliases:["sober living","sober homes","sober house","recovery housing","recovery homes","transitional recovery housing"]},
+    {category:"Shelter & Housing", aliases:["shelter","shelters","homeless shelter","homeless shelters","emergency shelter","housing","rent help","eviction help","place to stay"]},
+    {category:"Food & Benefits", aliases:["food","food banks","food bank","food pantry","food pantries","groceries","meals","hungry","snap","food benefits"]},
+    {category:"Benefits & Utilities", aliases:["benefits","utility","utilities","utility assistance","bill assistance","help paying bills","energy assistance"]},
+    {category:"Health & Health Coverage", aliases:["health care","healthcare","health coverage","health insurance","medical insurance","doctors","clinics"]},
+    {category:"Jobs & Training", aliases:["job","jobs","employment","work","job training","training","career help"]},
+    {category:"Legal Help", aliases:["legal help","lawyer","lawyers","legal aid","attorney","attorneys"]},
+    {category:"Transportation", aliases:["transportation","bus","bus pass","ride","rides","transport"]},
+    {category:"Child & Family Services", aliases:["children","child services","family services","families","parenting","family help"]},
+    {category:"Child Care & Early Childhood", aliases:["child care","childcare","daycare","early childhood"]},
+    {category:"Native American & Tribal Resources", aliases:["native american resources","tribal resources","tribal services","indigenous resources","indigenous services","bia"]},
+    {category:"Veterans", aliases:["veteran","veterans","veterans services","veteran services"]},
+    {category:"Behavioral Health & Recovery", aliases:["behavioral health","mental health","counseling","addiction treatment","recovery services"]},
+    {category:"Statewide Systems & Navigation", aliases:["okdhs","oklahoma dhs","dhs","oklahoma human services","state benefits","state assistance"]},
+    {category:"Family Resource Centers", aliases:["family resource center","family resource centers","resource center","resource centers"]}
+  ];
+  const categoryIntent=categoryIntents.find(group=>group.aliases.some(alias=>phrase===normalize(alias)||phrase.includes(normalize(alias))));
+  if(categoryIntent && resources.some(r=>r.category===categoryIntent.category)){
+    active=categoryIntent.category;
+    $("search").value="";
+    renderCats();render();
+    const count=resources.filter(r=>r.category===active).length;
+    voiceStatus.textContent=`Opening ${active}. ${count} resources are listed.`;
+    voiceSay(`Opening ${active}. There ${count===1?"is one resource":"are "+count+" resources"} in this category. The resources are displayed on the screen. You can say read results aloud to hear them.`);
+    const firstCard=$("list").querySelector("article");
+    if(firstCard) firstCard.scrollIntoView({behavior:"smooth",block:"start"});
+    return;
+  }
+
+  // Fuzzy organization/topic search: show matching results rather than failing silently.
+  const orgMatches=resources.filter(r=>{
+    const title=normalize(r.title), subtitle=normalize(r.subtitle), keywords=normalize(r.keywords);
+    return title.includes(phrase) || (subtitle && subtitle.includes(phrase)) || (keywords && keywords.includes(phrase));
+  });
+  const matches=orgMatches.length?orgMatches:resources.filter(r=>[r.title,r.subtitle,r.description,r.address,r.category,r.coverage,r.keywords]
+    .join(" ").toLowerCase().includes(phrase));
+  const query=matches.length && orgMatches.length===1 ? matches[0].title : spoken;
+  showVoiceResourceMatches(matches, query, spoken, !!orgMatches.length);
+}
+function showVoiceResourceMatches(matches, query, spoken, organizationMatch){
+  active="All";$("search").value=query;renderCats();render();
+  if(matches.length){
+    voiceStatus.textContent=`Found ${matches.length} matching resource${matches.length===1?"":"s"} for “${spoken}”.`;
+    const list=matches.slice(0,3);
+    const spokenInfo=list.map((r,i)=>{
+      const bits=[`${i+1}. ${r.title}.`];
+      if(r.subtitle) bits.push(`${r.subtitle}.`);
+      if(r.description) bits.push(`${r.description}.`);
+      if(r.phone) bits.push(`Phone number: ${r.phone}.`);
+      return bits.join(" ");
+    }).join(" ");
+    voiceSay(`${organizationMatch?"Here is the matching organization":"Here are the matching resources"} for ${spoken}. ${spokenInfo} The matching cards are displayed on the screen. You can tap Call or Open website.`);
+    const firstCard=$("list").querySelector("article");
+    if(firstCard) firstCard.scrollIntoView({behavior:"smooth",block:"start"});
+  }else{
+    voiceStatus.textContent="No matching resources. Try saying shelters, sober living, food, health care, OKDHS, or SoonerCare.";
+    voiceSay("I could not find a matching resource. Try saying shelters, sober living, food, health care, OKDHS, or SoonerCare.");
+  }
+}
+voiceToggle.addEventListener("click",()=>{
+  const opening=voicePanel.classList.contains("hidden");
+  if(opening){
+    voicePanel.classList.remove("hidden");
+    voiceToggle.setAttribute("aria-expanded","true");
+    voiceSay("Welcome to Resource Connect voice help. Say shelters, sober living, food, health care, jobs, OKDHS, or SoonerCare to open matching resources.");
+  }else{
+    stopVoiceAndClose();
+  }
+});
+$("voiceExit").addEventListener("click",()=>{
+  stopVoiceAndClose();
+  voiceStatus.textContent="Voice mode is off. You are back in the regular app.";
+  $("resourceView").classList.remove("hidden");
+  $("myView").classList.add("hidden");
+  $("resourceTab").classList.add("active");
+  $("myTab").classList.remove("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+document.querySelectorAll("[data-voice-topic]").forEach(button=>button.addEventListener("click",()=>voiceSearch(button.dataset.voiceTopic)));
+$("voiceRead").addEventListener("click",()=>{
+  const q=$("search").value.trim();
+  const matches=resources.filter(r=>(active==="All"||r.category===active)&&(!q||[r.title,r.subtitle,r.description,r.address,r.category,r.coverage,r.keywords].join(" ").toLowerCase().includes(q.toLowerCase()))).slice(0,5);
+  if(!matches.length){voiceSay("There are no resources currently shown. Choose a topic or search again.");return}
+  voiceStatus.textContent=`Reading ${matches.length} resources aloud.`;
+  voiceSay(matches.map((r,i)=>`${i+1}. ${r.title}. ${r.description||""}${r.phone?" Phone number: "+r.phone+".":""}${r.address?" Address: "+r.address+".":""}`).join(" Next resource. "));
+});
+$("voice211").addEventListener("click",()=>voiceSay("If you do not know where to start, call 2-1-1. Tell the operator what kind of help you need and where you are located. They can help you look for local resources. If you are in immediate danger, call 9-1-1."));
+$("voiceStop").addEventListener("click",()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel();if(voiceRecognition){try{voiceRecognition.stop()}catch(e){}}voiceStatus.textContent="Stopped. You can choose another topic whenever you are ready."});
+$("voiceListen").addEventListener("click",()=>{
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){voiceStatus.textContent="This browser does not support voice input. Choose one of the large topic buttons instead.";voiceSay("Voice input is not available in this browser. You can still choose one of the large topic buttons on the screen.");return}
+  try{
+    if(voiceRecognition){try{voiceRecognition.stop()}catch(e){}}
+    voiceRecognition=new SpeechRecognition();voiceRecognition.lang="en-US";voiceRecognition.continuous=false;voiceRecognition.interimResults=false;voiceRecognition.maxAlternatives=1;
+    voiceRecognition.onstart=()=>{voiceStatus.textContent="Listening now. Say what kind of help you need.";voiceSay("I'm listening. Say what kind of help you need.")};
+    voiceRecognition.onresult=event=>{const phrase=event.results[0][0].transcript;voiceStatus.textContent=`I heard: “${phrase}”`;voiceSearch(phrase)};
+    voiceRecognition.onerror=event=>{voiceStatus.textContent=event.error==="not-allowed"?"Microphone permission was not allowed. You can use the large topic buttons.":"I couldn't hear that clearly. Please try again or choose a topic."};
+    voiceRecognition.onend=()=>{};voiceRecognition.start();
+  }catch(e){voiceStatus.textContent="Voice input could not start. Please use a topic button or check microphone permission."}
+});
+
+const DB="okc-my-contacts-v1";
+function loadContacts(){try{return JSON.parse(localStorage.getItem(DB)||"[]")}catch(e){return[]}}
+function saveContacts(a){localStorage.setItem(DB,JSON.stringify(a))}
+function resetForm(){$("editId").value="";["name","phone","email","address","notes"].forEach(id=>$(id).value="");$("type").selectedIndex=0}
+function openForm(c){
+ $("formWrap").classList.remove("hidden");
+ $("formTitle").textContent=c?"Edit person or service":"Add a person or service";
+ $("editId").value=c?.id||"";
+ $("name").value=c?.name||"";$("type").value=c?.type||"Doctor / clinic";$("phone").value=c?.phone||"";
+ $("email").value=c?.email||"";$("address").value=c?.address||"";$("notes").value=c?.notes||"";
+ window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
+$("addBtn").onclick=()=>{resetForm();openForm()};
+$("cancelBtn").onclick=()=>{$("formWrap").classList.add("hidden");resetForm()};
+$("saveBtn").onclick=()=>{
+ const name=$("name").value.trim(); if(!name){alert("Please enter a name or organization.");return}
+ const contacts=loadContacts(), id=$("editId").value||crypto.randomUUID();
+ const item={id,name,type:$("type").value,phone:$("phone").value.trim(),email:$("email").value.trim(),address:$("address").value.trim(),notes:$("notes").value.trim(),updated:new Date().toISOString()};
+ const i=contacts.findIndex(x=>x.id===id); if(i>=0) contacts[i]=item; else contacts.unshift(item);
+ saveContacts(contacts);$("formWrap").classList.add("hidden");resetForm();renderMy();
+};
+$("mySearch").addEventListener("input",renderMy);
+function renderMy(){
+ const q=$("mySearch").value.trim().toLowerCase();
+ const arr=loadContacts().filter(c=>!q||Object.values(c).join(" ").toLowerCase().includes(q));
+ $("myList").innerHTML=arr.length?arr.map(c=>{
+   let actions="";
+   if(c.phone) actions+=`<a href="tel:${c.phone.replace(/[^0-9+]/g,"")}">Call</a>`;
+   if(c.email) actions+=`<a class="secondary" href="mailto:${esc(c.email)}">Email</a>`;
+   if(c.address) actions+=`<a class="secondary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}">Directions</a>`;
+   actions+=`<button class="secondary" onclick="editContact('${c.id}')">Edit</button><button class="secondary" onclick="deleteContact('${c.id}')">Delete</button>`;
+   return `<article class="card"><div class="sub">${esc(c.type)}</div><h2>${esc(c.name)}</h2>${c.phone?`<div class="meta"><b>Phone:</b> ${esc(c.phone)}</div>`:""}${c.email?`<div class="meta"><b>Email:</b> ${esc(c.email)}</div>`:""}${c.address?`<div class="meta"><b>Address:</b> ${esc(c.address)}</div>`:""}${c.notes?`<div class="desc"><b>Notes:</b> ${esc(c.notes)}</div>`:""}<div class="actions">${actions}</div></article>`
+ }).join(""):`<div class="empty">No saved contacts yet. Tap <b>Add a person or service</b> to create one.</div>`;
+}
+window.editContact=id=>{const c=loadContacts().find(x=>x.id===id);if(c)openForm(c)};
+window.deleteContact=id=>{if(confirm("Delete this saved contact from this phone?")){saveContacts(loadContacts().filter(x=>x.id!==id));renderMy()}};
+
+$("legalToggle").addEventListener("click",()=>{
+ const panel=$("legalPanel"),opening=panel.classList.contains("hidden");
+ panel.classList.toggle("hidden",!opening);$("legalToggle").setAttribute("aria-expanded",String(opening));
+ if(opening)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+fetch("resources.json").then(r=>r.json()).then(x=>{resources=x;renderCats();render()}).catch(()=>{$("list").innerHTML='<div class="empty">Resource data could not be loaded. Please refresh the page.</div>'});
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").then(reg=>reg.update()).catch(()=>{});
+</script>
+</body>
+</html>
