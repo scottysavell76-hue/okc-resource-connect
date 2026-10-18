@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="supported-languages" content="English, Spanish">
+<meta name="theme-color" content="#173331">
+<meta name="description" content="OKC Resource Connect — Oklahoma community resources, Family Resource Centers and statewide systems of support, plus a private personal contact list.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>OKC Resource Connect</title>
+<style>
+:root{--ink:#173331;--muted:#5d6c69;--bg:#f4f1e9;--card:#fff;--accent:#9a542a;--line:#d9d6ce;--danger:#9e3b32}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:var(--ink);color:#fff;padding:14px 18px 14px;position:sticky;top:0;z-index:5}.header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.language-picker{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700}.language-picker select{max-width:150px;padding:8px 10px;border-radius:9px;border:1px solid #b7c5c0;background:#fff;color:#173331;font:inherit}
+.brand{font-size:24px;font-weight:800}.tag{opacity:.85;font-size:13px;margin-top:3px}
+html,body{width:100%;min-width:100%;max-width:none;overflow-x:hidden}body{min-height:100vh}header{width:100%;max-width:none}main{width:100%;max-width:1100px;margin:0 auto;padding:16px 14px 28px}footer{width:100%;max-width:none}
+.home-intro{background:linear-gradient(145deg,#173331,#244a43);color:#fff;border-radius:20px;padding:22px 18px;margin:0 0 14px;box-shadow:0 5px 18px #17333118}
+.home-eyebrow{font-size:11px;font-weight:850;letter-spacing:1.5px;text-transform:uppercase;color:#f0c9a9;margin-bottom:8px}
+.home-intro h1{font-size:clamp(25px,6vw,34px);line-height:1.12;letter-spacing:-.5px;margin:0 0 9px;max-width:570px}
+.home-intro p{font-size:15px;line-height:1.5;color:#e3ece7;margin:0;max-width:580px}
+.home-section{margin:18px 0 22px}
+.home-section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 2px 10px}
+.home-section-head h2{font-size:20px;line-height:1.2;margin:0;color:var(--ink)}
+.home-section-head p{font-size:12px;line-height:1.35;color:var(--muted);margin:4px 0 0}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quick-card{min-width:0;min-height:126px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;padding:15px 14px;border:1px solid #d9d6ce;border-radius:16px;background:#fff;color:var(--ink);box-shadow:0 2px 7px #17333108;cursor:pointer;font:inherit;transition:transform .12s ease,border-color .12s ease}
+.quick-card:active{transform:scale(.985)}
+.quick-card:focus-visible,.tab:focus-visible,.cat:focus-visible,.primary:focus-visible{outline:3px solid #9a542a;outline-offset:3px}
+.quick-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#e9eee8;font-size:23px}
+.quick-card:nth-child(2) .quick-icon,.quick-card:nth-child(5) .quick-icon{background:#f5e8dc}
+.quick-title{font-size:16px;font-weight:850;line-height:1.2}
+.quick-desc{font-size:12px;line-height:1.35;color:var(--muted)}
+.home-hint{display:flex;align-items:flex-start;gap:9px;background:#e8eee9;border:1px solid #d5dfd7;border-radius:13px;padding:11px 12px;margin-top:10px;color:var(--ink);font-size:12px;line-height:1.4}
+.home-hint span{font-size:18px;line-height:1}
+.home-hint strong{display:block;font-size:13px;margin-bottom:2px}
+@media(min-width:560px){.quick-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.quick-card{min-height:140px;padding:17px}}
+.notice{background:#fff7df;border:1px solid #e5cf8b;border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:13px}
+.emergency{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.emergency a{background:var(--danger);color:#fff;padding:13px 8px;border-radius:14px;text-decoration:none;font-weight:800;text-align:center;font-size:15px;line-height:1.2}.emergency a small{font-size:11px;line-height:1.25}
+.emergency a:nth-child(2){background:#5b3a73}.emergency a:nth-child(3){background:#286b43}
+.search{width:100%;padding:14px;border:1px solid var(--line);border-radius:14px;font-size:16px;margin-bottom:12px;background:#fff}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.tab{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;font-weight:800;color:var(--ink)}.tab.active{background:var(--ink);color:#fff}
+.cats{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.cat{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:13px}.cat.active{background:var(--ink);color:#fff}
+.group-heading{font-size:19px;font-weight:850;margin:24px 0 7px;padding:11px 13px;background:#e5e9e3;border-left:5px solid var(--accent);border-radius:9px;color:var(--ink)}
+.group-heading:first-child{margin-top:8px}.group-count{font-size:12px;font-weight:650;color:var(--muted);margin-left:6px}
+.resource-card{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:10px 0;box-shadow:0 2px 8px #00000008;overflow:hidden}
+.resource-card-body{padding:15px}
+.resource-card h3{font-size:19px;line-height:1.25;margin:0 0 5px;color:var(--ink)}
+.resource-subtitle{font-size:15px;line-height:1.4;color:var(--ink);margin:5px 0 9px}
+.resource-card-body>p:not(.resource-subtitle){font-size:14px;line-height:1.5;color:#364743;margin:8px 0}
+.resource-meta{display:flex;flex-direction:column;gap:3px;font-size:12px;line-height:1.45;color:var(--muted);margin-top:9px}
+.resource-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.resource-action{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 14px;border-radius:12px;background:var(--ink);color:#fff;text-decoration:none;font-size:14px;font-weight:850;line-height:1.1;border:0;cursor:pointer;flex:1 1 130px;text-align:center}.resource-action[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.resource-action.secondary{background:#ece8de;color:var(--ink)}
+.resource-action.report{background:#f4e7df;color:#7d3f21;border:1px solid #d8b69f}
+@media(max-width:480px){.resource-actions{gap:7px}.resource-action{flex:1 1 auto;min-width:105px}.group-heading{font-size:18px}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 2px 8px #00000008}
+.card h2{font-size:18px;margin:0 0 4px}.sub{font-weight:600;color:var(--accent);font-size:13px}.desc{font-size:14px;line-height:1.45;color:#364743;margin:9px 0}.meta{font-size:12px;color:var(--muted);line-height:1.45}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.actions a,.actions button{border:0;background:var(--ink);color:#fff;text-decoration:none;border-radius:10px;padding:10px 12px;font-weight:700;font-size:13px}.actions .secondary{background:#ece8de;color:var(--ink)}
+.primary{display:block;width:100%;border:0;background:var(--accent);color:#fff;border-radius:13px;padding:14px;font-size:15px;font-weight:800;margin-bottom:12px}
+.form{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}.form h2{margin-top:0}.form label{display:block;font-size:13px;font-weight:700;margin:11px 0 5px}.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}.form textarea{min-height:90px;resize:vertical}.form .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.privacy{font-size:12px;color:var(--muted);line-height:1.45;background:#eef3f0;padding:11px;border-radius:11px;margin-bottom:12px}
+.empty{padding:30px 10px;text-align:center;color:var(--muted)}
+footer{margin-top:28px;background:#fff;border-top:1px solid var(--line);padding:22px 14px;text-align:center;color:var(--muted);font-size:12px;line-height:1.55}
+footer strong{color:var(--ink);font-size:15px}footer .ownership{margin-top:7px}
+.legal-toggle{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#f4f1e9;color:var(--ink);font:inherit;font-weight:750}
+.legal-panel{max-width:680px;margin:14px auto 0;padding:14px;text-align:left;border:1px solid var(--line);border-radius:12px;background:#f9f8f4;color:var(--ink);font-size:13px;line-height:1.55}
+.legal-panel h2{font-size:16px;margin:0 0 8px}.legal-panel p{margin:8px 0}.legal-panel a{color:var(--ink);overflow-wrap:anywhere}
+.hidden{display:none!important}
+.voice-entry{margin:12px 0;border:2px solid var(--ink);border-radius:15px;background:#fff;padding:12px}
+.voice-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;padding:16px;border:0;border-radius:14px;background:#286b43;color:#fff;font-size:18px;font-weight:850;box-shadow:0 3px 0 #194a2e;cursor:pointer}.voice-toggle:focus-visible{outline:3px solid #9a542a;outline-offset:3px}.voice-toggle[aria-pressed="true"]{background:#194a2e;box-shadow:0 3px 0 #123822}
+.voice-panel{margin-top:10px;padding:12px 14px;background:#eef3f0;border:1px solid #d5dfd7;border-radius:12px}
+.voice-exit{display:block;width:100%;min-height:54px;margin:0 0 14px;padding:13px;border:2px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);font-size:16px;font-weight:850}
+.voice-panel h2{margin:0 0 6px;font-size:19px}.voice-help{font-size:14px;line-height:1.45;margin:0 0 12px}
+.voice-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.voice-choices button,.voice-controls button{min-height:54px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:12px;font-size:15px;font-weight:750}
+.voice-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.voice-status{font-size:14px;font-weight:650;margin:12px 0 0;min-height:20px}
+.voice-small{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
+.report-launch{display:none!important}.report-form{scroll-margin-top:100px}.report-note{font-size:12px;line-height:1.45;color:var(--muted);background:#eef3f0;border-radius:10px;padding:10px;margin:10px 0}.report-form .actions button{cursor:pointer}.report-form .actions .secondary{border:0}
+
+.county-picker{margin:14px 0 16px;padding:14px;background:#fff;border:2px solid var(--line);border-radius:16px}
+.county-picker label{display:block;font-weight:850;font-size:16px;margin-bottom:7px}
+.county-picker select{width:100%;min-height:54px;border:2px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);padding:10px 12px;font-size:17px;font-weight:750}
+.county-status{margin:0 0 12px;padding:11px 13px;border-radius:12px;background:#eef3f0;font-size:14px;line-height:1.4}.companion-group{margin-top:18px}.companion-note{font-size:13px;color:var(--muted);margin:0 0 10px}
+</style>
+</head>
+<body>
+<header><div class="header-row"><div><div class="brand">OKC Resource Connect</div><div class="tag" id="tagline">Practical help. One tap at a time.</div></div><label class="language-picker" for="languageSelect"><span id="languageLabel">Language / Idioma</span><select id="languageSelect" aria-label="Choose language / Elegir idioma"><option value="en">English</option><option value="es">Español</option></select></label></div></header>
+<main>
+<section class="home-intro" aria-labelledby="homeTitle">
+  <div class="home-eyebrow">Oklahoma · Community support</div>
+  <h1 id="homeTitle">Let's find the help you need.</h1>
+  <p>Start with what matters today. Find services, make a call, and take your next step—one step at a time.</p>
+</section>
+<div class="notice"><b>Not sure where to start?</b> Call <b>211</b> for help finding local services. Resource availability can change, so call ahead when possible.</div>
+<div class="county-picker">
+  <label for="countySelect" id="countyLabel">County / Condado</label>
+  <select id="countySelect" aria-label="Select county / Seleccione el condado">
+    <option value="Oklahoma">Oklahoma County</option>
+  </select>
+  <label for="citySelect" id="cityLabel" style="margin-top:12px">City / Ciudad</label>
+  <select id="citySelect" aria-label="Select city / Seleccione la ciudad">
+    <option value="Oklahoma City">Oklahoma City</option><option value="ALL">All cities / Todas las ciudades</option>
+  </select>
+</div>
+<div id="countyStatus" class="county-status" role="status" aria-live="polite"></div>
+<div id="locationStatus" class="county-status" role="status" aria-live="polite">📍 Location: requesting permission…</div>
+<div class="emergency"><a href="tel:911">CALL 911<br><small>Immediate emergency</small></a><a href="tel:988">CALL 988<br><small>Suicide & crisis support</small></a><a href="tel:211">CALL 211<br><small>Local services & support</small></a></div>
+
+<section class="home-section" aria-labelledby="quickStartTitle">
+  <div class="home-section-head"><div><h2 id="quickStartTitle">What do you need today?</h2><p>Choose a starting point. You can always search or browse all services.</p></div></div>
+  <div class="quick-grid">
+    <button type="button" class="quick-card" data-home-category="Shelter & Day Services">
+      <span class="quick-icon" aria-hidden="true">🏠</span><span class="quick-title">A place to stay</span><span class="quick-desc">Shelters, day services and housing help</span>
+    </button>
+    <button type="button" class="quick-card" data-home-category="Food & Basic Needs">
+      <span class="quick-icon" aria-hidden="true">🥫</span><span class="quick-title">Food & essentials</span><span class="quick-desc">Meals, food pantries and basic needs</span>
+    </button>
+    <button type="button" class="quick-card" data-home-category="Emergency & Crisis">
+      <span class="quick-icon" aria-hidden="true">💚</span><span class="quick-title">Urgent support</span><span class="quick-desc">Crisis lines and immediate support options</span>
+    </button>
+    <button type="button" class="quick-card" data-home-category="Sober Living & Recovery Housing">
+      <span class="quick-icon" aria-hidden="true">🌱</span><span class="quick-title">Recovery support</span><span class="quick-desc">Sober living and recovery housing</span>
+    </button>
+    <button type="button" class="quick-card" data-home-category="Benefits & Utility Assistance">
+      <span class="quick-icon" aria-hidden="true">📋</span><span class="quick-title">Benefits & bills</span><span class="quick-desc">OKDHS, utility and financial assistance</span>
+    </button>
+    <button type="button" class="quick-card" data-home-category="Identification & Essential Documents">
+      <span class="quick-icon" aria-hidden="true">🪪</span><span class="quick-title">IDs & documents</span><span class="quick-desc">Identification and essential paperwork</span>
+    </button>
+  </div>
+  <div class="home-hint"><span aria-hidden="true">🎙️</span><div><strong>Prefer to speak?</strong>Use “Talk to Resource Connect” below to say a service name, or use the search bar to find an organization.</div></div>
+</section>
+
+<div class="tabs">
+<button class="tab active" id="resourceTab">Community Resources</button>
+<button class="tab" id="myTab">My People & Services</button>
+</div>
+
+<section class="voice-entry" aria-label="Spoken navigation">
+  <button type="button" class="voice-toggle" id="voiceToggle" aria-expanded="false" aria-controls="voicePanel" aria-pressed="false">🎙️ Tap to speak</button>
+  <div id="voicePanel" class="voice-panel hidden">
+    <p class="voice-help">You can say a service like <b>food</b>, <b>shelter</b>, or <b>ID</b>—or say the name of a specific organization. I'll show the matching resources.</p>
+    <p class="voice-status" id="voiceStatus" role="status" aria-live="polite">Getting ready to listen…</p>
+    <p class="voice-small">Tap the green button again to stop listening. Microphone access depends on your browser and device. You can always use search or the service buttons instead.</p>
+  </div>
+</section>
+
+<section id="resourceView">
+<input id="search" class="search" placeholder="Search shelter, food, housing, family centers, systems…" autocomplete="off">
+<div id="cats" class="cats"></div>
+<section id="reportForm" class="form report-form hidden" aria-labelledby="reportTitle">
+  <h2 id="reportTitle">Report a resource issue</h2>
+  <p id="reportIntro">Help us keep this directory accurate. Please do not include private or sensitive personal information.</p>
+  <label for="reportResource" id="reportResourceLabel">Resource or organization *</label>
+  <input id="reportResource" required maxlength="180" placeholder="Name of the resource">
+  <label for="reportType" id="reportTypeLabel">What needs attention? *</label>
+  <select id="reportType" required>
+    <option value="Broken website or link">Broken website or link</option>
+    <option value="Incorrect phone number">Incorrect phone number</option>
+    <option value="Incorrect address or location">Incorrect address or location</option>
+    <option value="Hours or availability changed">Hours or availability changed</option>
+    <option value="Services or eligibility changed">Services or eligibility changed</option>
+    <option value="Organization closed or moved">Organization closed or moved</option>
+    <option value="Suggest a missing resource">Suggest a missing resource</option>
+    <option value="Other update">Other</option>
+  </select>
+  <label for="reportDetails" id="reportDetailsLabel">Details *</label>
+  <textarea id="reportDetails" required maxlength="2500" placeholder="What did you notice? Include the correct information if you know it."></textarea>
+  <p class="report-note" id="reportNote">When you submit, your email app will open with the report addressed to okcresource@gmail.com. Review it and press Send. The report is not sent automatically.</p>
+  <div class="actions"><button type="button" id="reportSubmitBtn">Submit</button></div>
+  <p id="reportStatus" role="status" aria-live="polite"></p>
+</section>
+<div id="list"></div>
+</section>
+
+<section id="myView" class="hidden">
+<div class="privacy"><b>Private on this phone.</b> Contacts you add here are stored in this browser on this device. They are not sent to OKC Resource Connect's server. Anyone with access to this phone/browser may still be able to access them. Don't use this area for passwords, Social Security numbers, medical records, or other highly sensitive information.</div>
+<button class="primary" id="addBtn">＋ Add a person or service</button>
+
+<div id="formWrap" class="form hidden">
+<h2 id="formTitle">Add a person or service</h2>
+<input type="hidden" id="editId">
+<label for="name">Name / organization *</label>
+<input id="name" placeholder="Example: Dr. Smith or Legal Aid">
+<label for="type">Type</label>
+<select id="type">
+<option>Doctor / clinic</option><option>Lawyer / legal aid</option><option>Pharmacy</option><option>Caseworker / navigator</option><option>Housing contact</option><option>School / child care</option><option>Employer</option><option>Food resource</option><option>Family / friend</option><option>Other</option>
+</select>
+<div class="row">
+<div><label for="phone">Phone</label><input id="phone" inputmode="tel" placeholder="405-555-1234"></div>
+<div><label for="email">Email</label><input id="email" inputmode="email" placeholder="name@example.org"></div>
+</div>
+<label for="address">Address</label>
+<input id="address" placeholder="Street, city, state">
+<label for="notes">Notes</label>
+<textarea id="notes" placeholder="Hours, appointment date, what they help with, etc."></textarea>
+<div class="actions">
+<button id="saveBtn">Save</button><button class="secondary" id="cancelBtn">Cancel</button>
+</div>
+</div>
+
+<input id="mySearch" class="search" placeholder="Search my contacts…" autocomplete="off">
+<div id="myList"></div>
+</section>
+</main>
+
+<footer>
+<strong>OKC Resource Connect™</strong>
+<div class="ownership">Developed by Darryl Savell</div>
+<div>Community resources verified October 16, 2026. Organizations listed retain ownership of their respective names, trademarks, logos, content and services. Listing does not imply endorsement, partnership or affiliation unless expressly stated.</div>
+<div class="ownership">© 2026 Darryl Savell. All rights reserved.</div>
+<button type="button" class="legal-toggle" id="legalToggle" aria-expanded="false" aria-controls="legalPanel">Legal &amp; About</button>
+<section class="legal-panel hidden" id="legalPanel" aria-label="Legal and About information">
+  <h2>About OKC Resource Connect</h2>
+  <p>OKC Resource Connect is a community resource-finding tool developed by Darryl Savell. It is intended to help people find organizations and services; it is not an emergency service and does not guarantee that a listed service is available or that a person is eligible.</p>
+  <h2>Ownership &amp; intellectual property</h2>
+  <p><strong>© 2026 Darryl Savell. All rights reserved.</strong> This notice applies to original app code and original written or design content owned by Darryl Savell. The app may also include factual information, links, names, marks, or other materials belonging to third parties; those remain the property of their respective owners.</p>
+  <p><strong>OKC Resource Connect™</strong> is a trademark claim by Darryl Savell. The ™ symbol does not mean the mark is federally registered.</p>
+  <p>Unless permitted by law or authorized in writing by the rights holder, do not copy, republish, redistribute, or commercially reuse the app's original code, original written content, or original design elements. This notice does not claim ownership of third-party materials or prevent lawful uses.</p>
+  <h2>Resource accuracy &amp; third-party services</h2>
+  <p>Resource information can change. Confirm current services, eligibility, hours, and availability directly with each organization. Listing a resource does not imply endorsement, partnership, or affiliation.</p>
+  <p><strong>Contact:</strong> For permission requests or questions about original app materials, seek authorization from Darryl Savell before reuse.</p>
+</section>
+</footer>
+
+<script>
+let resources=[], active="All", voiceResultIds=null;
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const OK_COUNTIES=["Adair","Alfalfa","Atoka","Beaver","Beckham","Blaine","Bryan","Caddo","Canadian","Carter","Cherokee","Choctaw","Cimarron","Cleveland","Coal","Comanche","Cotton","Craig","Creek","Custer","Delaware","Dewey","Ellis","Garfield","Garvin","Grady","Grant","Greer","Harmon","Harper","Haskell","Hughes","Jackson","Jefferson","Johnston","Kay","Kingfisher","Kiowa","Latimer","Le Flore","Lincoln","Logan","Love","Major","Marshall","Mayes","McClain","McCurtain","McIntosh","Murray","Muskogee","Noble","Nowata","Okfuskee","Oklahoma","Okmulgee","Osage","Ottawa","Pawnee","Payne","Pittsburg","Pontotoc","Pottawatomie","Pushmataha","Roger Mills","Rogers","Seminole","Sequoyah","Stephens","Texas","Tillman","Tulsa","Wagoner","Washington","Washita","Woods","Woodward"];
+let selectedCounty="Oklahoma", selectedCity="Oklahoma City";
+// City-centroid coordinates used for fast statewide nearest-resource ranking.
+// Directions always use the device's live coordinates when available.
+const CITY_COORDS={
+  "Ada":[34.774338,-96.678365],"Altus":[34.665029,-99.303298],"Alva":[36.786761,-98.656185],"Anadarko":[35.064598,-98.246726],"Antlers":[34.231210,-95.620250],"Ardmore":[34.172927,-97.130912],"Atoka":[34.385930,-96.128330],"Bartlesville":[36.750927,-95.977178],"Beaver":[36.816140,-100.519870],"Blanchard":[35.157229,-97.661691],"Bristow":[35.835505,-96.391899],"Buffalo":[36.835000,-99.630000],"Chandler":[35.724506,-96.900660],"Cheyenne":[35.613000,-99.671000],"Chickasha":[35.052565,-97.936430],"Claremore":[36.318302,-95.555781],"Clinton":[35.501253,-98.955128],"Cushing":[35.985796,-96.754249],"Davis":[34.478638,-97.152671],"Duncan":[34.532731,-97.856345],"Durant":[33.993987,-96.394700],"El Reno":[35.551544,-97.957110],"Elk City":[35.411990,-99.404260],"Enid":[36.396762,-97.879134],"Eufaula":[35.317461,-95.583923],"Grove":[36.596324,-94.785349],"Guthrie":[35.812591,-97.478209],"Guymon":[36.685809,-101.479501],"Hugo":[34.010000,-95.510000],"Idabel":[33.901906,-94.828692],"Jay":[36.427107,-94.800361],"Lawton":[34.605198,-98.395228],"Lone Grove":[34.187355,-97.273971],"Madill":[34.079200,-96.762268],"Marietta":[33.934022,-97.123557],"McAlester":[34.919012,-95.780026],"Miami":[36.874000,-94.877000],"Moore":[35.330718,-97.468049],"Muskogee":[35.747877,-95.369691],"Norman":[35.222572,-97.439482],"Nowata":[36.703637,-95.638669],"Oklahoma City":[35.472989,-97.517054],"Okmulgee":[35.613401,-95.999000],"Pauls Valley":[34.740000,-97.222000],"Ponca City":[36.724073,-97.065902],"Poteau":[35.064952,-94.652921],"Pryor":[36.308000,-95.316000],"Sallisaw":[35.458199,-94.810127],"Sand Springs":[36.188006,-96.167693],"Sapulpa":[35.998000,-96.114000],"Sayre":[35.293365,-99.625385],"Seiling":[36.149148,-98.924664],"Seminole":[35.236017,-96.626406],"Shattuck":[36.277000,-99.882000],"Shawnee":[35.327293,-96.925300],"Stigler":[35.256000,-95.123000],"Stillwater":[36.115631,-97.058572],"Stillwell":[35.818455,-94.634896],"Tahlequah":[35.915370,-94.969956],"Tecumseh":[35.266078,-96.930327],"Tulsa":[36.156312,-95.992752],"Vinita":[36.628265,-95.197628],"Wagoner":[35.966128,-95.386342],"Watonga":[35.844000,-98.413000],"Waurika":[34.167000,-97.997000],"Weatherford":[35.540572,-98.687538],"Wilson":[34.172813,-97.430912],"Woodward":[36.419329,-99.407656],"Yukon":[35.515024,-97.773223]
+};
+let userLocation=null, locationWatchId=null, locationMode=false, locationBusy=false;
+
+function populateCounties(){
+  const select=$("countySelect"); if(!select)return;
+  const countyWord=appLanguage==="es"?"Condado":"County";
+  select.innerHTML=`<option value="ALL">${tr("countyAll")}</option>`+OK_COUNTIES.map(c=>`<option value="${esc(c)}">${esc(c)} ${countyWord}</option>`).join("");
+  select.value=selectedCounty;
+}
+function canonicalCityName(value){
+  return String(value||"").trim().replace(/\s+/g," ");
+}
+function populateCities(){
+  const select=$("citySelect"); if(!select)return;
+  const cityMap=new Map();
+  resources.filter(r=>selectedCounty==="ALL"||r.county===selectedCounty||(Array.isArray(r.counties)&&r.counties.includes(selectedCounty))).forEach(r=>{
+    const city=canonicalCityName(r.city);
+    if(!city)return;
+    const key=city.toLocaleLowerCase();
+    if(!cityMap.has(key)) cityMap.set(key,city);
+  });
+  const cities=[...cityMap.values()].sort((a,b)=>a.localeCompare(b));
+  select.innerHTML=`<option value="ALL">${tr("cityAll")}</option>`+cities.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  const selectedKey=canonicalCityName(selectedCity).toLocaleLowerCase();
+  const matchedCity=cities.find(c=>c.toLocaleLowerCase()===selectedKey);
+  selectedCity=matchedCity||"ALL";
+  select.value=selectedCity;
+}
+function resourceTabs(r){
+  const t=Array.isArray(r.tabs)&&r.tabs.length?r.tabs:[r.category];
+  return t.filter(x=>SERVICE_TABS.includes(x));
+}
+function countyFilteredResources(){
+  if(selectedCounty==="ALL") return resources;
+  if(selectedCounty==="Oklahoma"){
+    return resources.filter(r=>r.county==="Statewide"||r.county==="Oklahoma"||r.city==="Oklahoma City"||r.city==="OKC"||r.county===selectedCounty||(Array.isArray(r.counties)&&r.counties.includes(selectedCounty)));
+  }
+  return resources.filter(r=>r.county==="Statewide"||r.county===selectedCounty||(Array.isArray(r.counties)&&r.counties.includes(selectedCounty)));
+}
+function cityFilteredResources(){
+  const base=countyFilteredResources();
+  if(selectedCity==="ALL") return base;
+  return base.filter(r=>!r.city || r.city===selectedCity || r.county==="Statewide" || (Array.isArray(r.counties)&&r.counties.includes(selectedCounty)));
+}
+function updateCountyStatus(){
+  const el=$("countyStatus");if(!el)return;
+  if(selectedCity!=="ALL"){
+    const local=resources.filter(r=>r.city===selectedCity).length;
+    el.textContent=appLanguage==="es"?`Mostrando recursos para ${selectedCity}${selectedCounty!=="ALL"?`, ${selectedCounty} County`:""}. ${local} recursos específicos de la ciudad, más recursos del condado y estatales.`:`Showing resources for ${selectedCity}${selectedCounty!=="ALL"?`, ${selectedCounty} County`:""}. ${local} city-specific resources, plus county and statewide resources.`;
+    return;
+  }
+  if(selectedCounty!=="ALL"){
+    const local=resources.filter(r=>r.county===selectedCounty||(Array.isArray(r.counties)&&r.counties.includes(selectedCounty))).length;
+    el.textContent=local?`${tr("localFor")} ${selectedCounty} County • ${local} ${local===1?tr("resource"):tr("resources")} + ${tr("statewideResources")}.`:`${tr("noLocal")} ${selectedCounty} County.`;
+    return;
+  }
+  el.textContent=appLanguage==="es"?"Mostrando recursos de Oklahoma.":"Showing Oklahoma resources.";
+}
+function setCounty(county){selectedCounty=county;selectedCity="ALL";voiceResultIds=null;$ ("search").value="";populateCounties();populateCities();updateCountyStatus();renderCats();render();}
+function setCity(city){selectedCity=city;voiceResultIds=null;$ ("search").value="";populateCities();render();}
+function categoriesFromData(){return ["All",...SERVICE_TABS];}
+function renderCats(){
+  $("cats").innerHTML=categoriesFromData().map(c=>`<button class="cat ${c===active?'active':''}" onclick="setCat('${c.replace(/'/g,"\\'")}')">${esc(catLabel(c))}</button>`).join("");
+}
+function setCat(c){active=c;voiceResultIds=null;renderCats();render()}
+function resourceMatchesTab(r,tab){return tab==="All"||resourceTabs(r).includes(tab)}
+function haversineMiles(a,b){
+  if(!a||!b)return Infinity;
+  const R=3958.7613, p=Math.PI/180, dLat=(b[0]-a[0])*p, dLon=(b[1]-a[1])*p;
+  const x=Math.sin(dLat/2)**2+Math.cos(a[0]*p)*Math.cos(b[0]*p)*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function resourcePoint(r){
+  if(Number.isFinite(Number(r.lat))&&Number.isFinite(Number(r.lng))) return [Number(r.lat),Number(r.lng)];
+  if(r.city&&CITY_COORDS[r.city]) return CITY_COORDS[r.city];
+  return null;
+}
+function resourceDistance(r){return userLocation?userLocation.distanceTo(resourcePoint(r)):Infinity;}
+function sortForLocation(arr){
+  if(locationMode && userLocation){
+    return arr.sort((a,b)=>resourceDistance(a)-resourceDistance(b)||a.title.localeCompare(b.title));
+  }
+  if(selectedCity==="ALL") return arr.sort((a,b)=>Number(a.county!==selectedCounty)-Number(b.county!==selectedCounty)||a.title.localeCompare(b.title));
+  return arr.sort((a,b)=>{
+    const rank=r=>r.city===selectedCity?0:(r.county===selectedCounty?1:(r.county==="Statewide"?2:3));
+    return rank(a)-rank(b)||a.title.localeCompare(b.title);
+  });
+}
+function distanceLabel(r){
+  if(!locationMode||!userLocation)return "";
+  const d=resourceDistance(r); if(!Number.isFinite(d))return "";
+  if(d<0.1)return appLanguage==="es"?"A menos de 0.1 millas":"Less than 0.1 miles away";
+  return appLanguage==="es"?`Aprox. ${d.toFixed(d<10?1:0)} millas`:`Approx. ${d.toFixed(d<10?1:0)} miles away`;
+}
+function mapsDirectionsUrl(address){
+  const destination=encodeURIComponent(address||"");
+  if(userLocation) return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(userLocation.lat+","+userLocation.lng)}&destination=${destination}&travelmode=driving`;
+  return `https://www.google.com/maps/search/?api=1&query=${destination}`;
+}
+
+function resourceText(r, field){
+  if(appLanguage==="es") return r[field+"_es"] || r[field] || "";
+  return r[field] || "";
+}
+function searchableText(r){
+  return normalizeVoice([r.title,r.subtitle,r.subtitle_es,r.description,r.description_es,r.category,r.coverage,r.coverage_es,r.city,r.address,r.keywords,r.keywords_es,(Array.isArray(r.tabs)?r.tabs.join(" "):"")].filter(Boolean).join(" "));
+}
+function resourceCard(r){
+  const title=resourceText(r,"title")||"Resource";
+  const subtitle=resourceText(r,"subtitle");
+  const description=resourceText(r,"description");
+  const coverage=resourceText(r,"coverage")||r.coverage||"";
+  const address=r.address||"";
+  const phone=r.phone||"";
+  const url=r.url||"";
+  const source=r.source||url||"";
+  const verified=r.verified||"";
+  const phoneHref=phone?`tel:${String(phone).replace(/[^0-9+]/g,"")}`:"";
+  const safeUrl=/^https?:\/\//i.test(url)?url:"";
+  const safeSource=/^https?:\/\//i.test(source)?source:"";
+  const actionText=appLanguage==="es"?(r.action_es||r.action||"Abrir recurso"):(r.action||"Open resource");
+  const unavailable=appLanguage==="es"?"No disponible":"Unavailable";
+  const buttons=[];
+  if(phoneHref){
+    buttons.push(`<a class="resource-action" href="${esc(phoneHref)}" aria-label="${esc((appLanguage==="es"?"Llamar a ":"Call ")+title)}">${esc(appLanguage==="es"?"📞 Llamar":"📞 Call")}</a>`);
+  }else{
+    buttons.push(`<span class="resource-action" aria-disabled="true">${esc(appLanguage==="es"?"📞 Llamar — "+unavailable:"📞 Call — "+unavailable)}</span>`);
+  }
+  if(address){
+    const mapUrl=mapsDirectionsUrl(address);
+    buttons.push(`<a class="resource-action secondary" href="${mapUrl}" target="_blank" rel="noopener noreferrer" aria-label="${esc((appLanguage==="es"?"Cómo llegar a ":"Directions to ")+title)}">${esc(appLanguage==="es"?"📍 Cómo llegar":"📍 Directions")}</a>`);
+  }else{
+    buttons.push(`<span class="resource-action secondary" aria-disabled="true">${esc(appLanguage==="es"?"📍 Cómo llegar — "+unavailable:"📍 Directions — "+unavailable)}</span>`);
+  }
+  if(safeSource) buttons.push(`<a class="resource-action secondary" href="${esc(safeSource)}" target="_blank" rel="noopener noreferrer">${esc(appLanguage==="es"?"🔗 Fuente":"🔗 Source")}</a>`);
+  else if(safeUrl) buttons.push(`<a class="resource-action secondary" href="${esc(safeUrl)}" target="_blank" rel="noopener noreferrer">${esc(actionText)}</a>`);
+  
+  buttons.push(`<button type="button" class="resource-action report" data-report-resource="${esc(title)}">${esc(appLanguage==="es"?"⚠️ Informar problema":"⚠️ Report issue")}</button>`);
+  const dist=distanceLabel(r);
+  const meta=[dist,coverage,address,verified?(appLanguage==="es"?`Verificado ${verified}`:`Verified ${verified}`):""].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join("");
+  return `<article class="resource-card"><div class="resource-card-body"><h3>${esc(title)}</h3>${subtitle?`<p class="resource-subtitle">${esc(subtitle)}</p>`:""}${description?`<p>${esc(description)}</p>`:""}${meta?`<div class="resource-meta">${meta}</div>`:""}<div class="resource-actions">${buttons.join("")}</div></div></article>`;
+}
+function resourceDedupKey(r){
+  const id=String(r.id||"").trim().toLocaleLowerCase();
+  if(id)return `id:${id}`;
+  return `res:${[r.title,r.phone,r.address,r.city,r.county].map(v=>String(v||"").trim().replace(/\s+/g," ").toLocaleLowerCase()).join("|")}`;
+}
+function dedupeResources(list){
+  const seen=new Set();
+  return list.filter(r=>{
+    const key=resourceDedupKey(r);
+    if(seen.has(key))return false;
+    seen.add(key);
+    return true;
+  });
+}
+function render(){
+  const q=normalizeVoice($("search").value.trim());
+  const available=locationMode&&userLocation?resources:cityFilteredResources();
+  let matches=available.filter(r=>resourceMatchesTab(r,active) && (voiceResultIds===null ? (!q||searchableText(r).includes(q)) : voiceResultIds.includes(r.id)));
+  matches=dedupeResources(matches);
+  matches=sortForLocation(matches);
+  if(!matches.length){$("list").innerHTML=`<div class="empty">${appLanguage==="es"?"No se encontraron recursos para este servicio y ubicación. Pruebe otra búsqueda o seleccione otro condado/ciudad.":"No resources were found for this service and location. Try another search or choose another county/city."}</div>`;return}
+  if(active!=="All"){
+    $("list").innerHTML=matches.map(resourceCard).join("");return;
+  }
+  const groups=SERVICE_TABS.map(category=>({category,items:matches.filter(r=>resourceTabs(r).includes(category))})).filter(group=>group.items.length);
+  $("list").innerHTML=groups.map(group=>`<section class="resource-group" aria-label="${esc(catLabel(group.category))}"><h2 class="group-heading">${esc(catLabel(group.category))}<span class="group-count">${group.items.length} ${group.items.length===1?tr("resource"):tr("resources")}</span></h2>${group.items.map(resourceCard).join("")}</section>`).join("");
+}
+
+function stopVoiceAndClose(){
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  if(voiceRecognition){try{voiceRecognition.stop()}catch(e){} voiceRecognition=null;}
+  voicePanel.classList.add("hidden");
+  voiceToggle.setAttribute("aria-expanded","false");
+}
+$("resourceTab").onclick=()=>{stopVoiceAndClose();$("resourceTab").classList.add("active");$("myTab").classList.remove("active");$("resourceView").classList.remove("hidden");$("myView").classList.add("hidden")};
+$("myTab").onclick=()=>{stopVoiceAndClose();$("myTab").classList.add("active");$("resourceTab").classList.remove("active");$("myView").classList.remove("hidden");$("resourceView").classList.add("hidden");renderMy()};
+function openHomeCategory(category){
+  locationMode=!!userLocation;
+  if(locationMode){
+    active=category;
+    voiceResultIds=null;
+    $("search").value="";
+    renderCats();render();
+    if(category==="Shelter & Day Services") renderTransportationCompanion();
+  }else if(!resources.some(r=>(Array.isArray(r.tabs)?r.tabs.includes(category):r.category===category))){
+    $("search").value=category;active="All";voiceResultIds=null;renderCats();render();
+  }else{
+    active=category;voiceResultIds=null;$("search").value="";renderCats();render();
+  }
+  $("resourceTab").classList.add("active");$("myTab").classList.remove("active");$("resourceView").classList.remove("hidden");$("myView").classList.add("hidden");
+  $("list").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderTransportationCompanion(){
+  if(!userLocation)return;
+  const transport=resources.filter(r=>resourceTabs(r).includes("Transportation")).sort((a,b)=>resourceDistance(a)-resourceDistance(b));
+  if(!transport.length)return;
+  const top=transport.slice(0,3);
+  const heading=appLanguage==="es"?"Transporte para llegar a la ayuda":"Transportation assistance to reach help";
+  const note=appLanguage==="es"?"Opciones de transporte cercanas cuando estén disponibles.":"Nearby transportation options when available.";
+  const html=`<section class="resource-group companion-group"><h2 class="group-heading">${heading}</h2><p class="companion-note">${note}</p>${top.map(resourceCard).join("")}</section>`;
+  $("list").insertAdjacentHTML("beforeend",html);
+}
+
+document.querySelectorAll("[data-home-category]").forEach(button=>button.addEventListener("click",()=>openHomeCategory(button.dataset.homeCategory)));
+$("search").addEventListener("input",()=>{voiceResultIds=null;render()});
+
+// Optional voice access. Voice commands are kept separate from the typed search field.
+const voicePanel=$("voicePanel"), voiceToggle=$("voiceToggle"), voiceStatus=$("voiceStatus");
+let voiceRecognition=null, voiceSessionActive=false, voiceSpeaking=false, voiceRestartTimer=null, currentUtterance=null;
+function startVoiceRecognition(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!voiceSessionActive||voiceSpeaking||voiceRecognition||!SpeechRecognition)return;
+  try{
+    const recognition=new SpeechRecognition();
+    voiceRecognition=recognition;
+    recognition.lang=appLanguage==="es"?"es-US":"en-US";
+    recognition.continuous=false;
+    recognition.interimResults=false;
+    recognition.maxAlternatives=3;
+    recognition.onstart=()=>{voiceStatus.textContent=tr("voiceStart");};
+    recognition.onresult=event=>{
+      let transcript="";
+      // Prefer the best recognition alternative, but inspect alternatives for command phrases too.
+      const result=event.results[event.resultIndex||0];
+      for(let i=0;i<result.length;i++){
+        const candidate=result[i].transcript||"";
+        if(/\b(read|red)\s+(the\s+)?results?\b/i.test(candidate)||/\bstop\s+listening\b/i.test(candidate)){transcript=candidate;break;}
+        if(!transcript)transcript=candidate;
+      }
+      handleVoiceCommand(transcript);
+    };
+    recognition.onerror=event=>{
+      if(event.error==="not-allowed"||event.error==="service-not-allowed"){
+        voiceSessionActive=false;
+        voiceStatus.textContent=appLanguage==="es"?"No se permitió el micrófono. Use los botones de temas o la búsqueda.":"Microphone permission was not allowed. Use the large topic buttons or regular search.";
+      } else if(event.error!=="aborted" && voiceSessionActive){
+        voiceStatus.textContent=appLanguage==="es"?"No pude escuchar con claridad. Volveré a escuchar en un momento; también puede elegir un tema.":"I couldn't hear that clearly. I'll listen again in a moment; you can also choose a topic button.";
+      }
+    };
+    recognition.onend=()=>{
+      if(voiceRecognition===recognition)voiceRecognition=null;
+      if(voiceSessionActive&&!voiceSpeaking){
+        clearTimeout(voiceRestartTimer);
+        voiceRestartTimer=setTimeout(startVoiceRecognition,450);
+      }
+    };
+    recognition.start();
+  }catch(e){
+    if(voiceRecognition)voiceRecognition=null;
+    if(voiceSessionActive){
+      voiceStatus.textContent=appLanguage==="es"?"No se pudo iniciar la escucha por voz. Revise el permiso del micrófono o use los botones de temas.":"Voice listening could not start. Check microphone permission or use the topic buttons.";
+    }
+  }
+}
+function voiceSay(text){
+  if(!("speechSynthesis" in window)){
+    voiceStatus.textContent=text;
+    voiceSpeaking=false;
+    if(voiceSessionActive)startVoiceRecognition();
+    return;
+  }
+  // Invalidate the previous utterance before cancelling it, so its onend/onerror
+  // cannot restart the microphone while the new message is being spoken.
+  voiceSpeaking=false;
+  currentUtterance=null;
+  window.speechSynthesis.cancel();
+  voiceSpeaking=true;
+  clearTimeout(voiceRestartTimer);
+  // Do not let the microphone hear the assistant's own voice as a new search.
+  if(voiceRecognition){try{voiceRecognition.stop()}catch(e){} }
+  const utterance=new SpeechSynthesisUtterance(text);
+  currentUtterance=utterance;
+  utterance.lang=appLanguage==="es"?"es-US":"en-US";
+  utterance.rate=0.92;
+  const resume=()=>{
+    if(currentUtterance!==utterance)return;
+    currentUtterance=null;
+    voiceSpeaking=false;
+    if(voiceSessionActive){
+      clearTimeout(voiceRestartTimer);
+      voiceRestartTimer=setTimeout(startVoiceRecognition,450);
+    }
+  };
+  utterance.onend=resume;
+  utterance.onerror=()=>{voiceStatus.textContent=appLanguage==="es"?"No se pudo reproducir el audio. Aún puede usar las opciones en pantalla.":"Audio could not play. You can still use the on-screen choices.";resume()};
+  window.speechSynthesis.speak(utterance);
+}
+function normalizeVoice(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/&/g,"and").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim()}
+function getVisibleResources(){
+  const q=normalizeVoice($("search").value.trim());
+  return countyFilteredResources().filter(r=>(active==="All"||(Array.isArray(r.tabs)?r.tabs.includes(active):r.category===active))&&(
+    voiceResultIds!==null ? voiceResultIds.includes(r.id) : (!q||searchableText(r).includes(q))
+  ));
+}
+function readVoiceResults(){
+  const matches=getVisibleResources().slice(0,5);
+  if(!matches.length){
+    voiceStatus.textContent=tr("noResources");
+    voiceSay(tr("noResourcesSpeech"));
+    return;
+  }
+  voiceStatus.textContent=appLanguage==="es"?`Leyendo ${matches.length} ${matches.length===1?"recurso":"recursos"} en voz alta. Volveré a escuchar cuando termine.`:`Reading ${matches.length} resource${matches.length===1?"":"s"} aloud. I will listen again when I'm finished.`;
+  const speech=matches.map((r,i)=>`${i+1}. ${r.title}. ${resourceText(r,"subtitle")}. ${resourceText(r,"description")}${r.phone?(appLanguage==="es"?" Teléfono: ":" Phone number: ")+r.phone+".":""}${r.address?(appLanguage==="es"?" Dirección: ":" Address: ")+r.address+".":""}`).join(appLanguage==="es"?" Siguiente recurso. ":" Next resource. ");
+  voiceSay(appLanguage==="es"?speech+" Para escucharlos otra vez, diga leer resultados. Para buscar otro servicio, diga su nombre.":speech+" To hear these again, say read results. To find another service, say its name.");
+}
+function handleVoiceCommand(term){
+  const spoken=String(term||"").trim();
+  const phrase=normalizeVoice(spoken)
+    .replace(/^(please\s+)?(take me to|go to|open|show me|show|find|search for|i need|i want|look for|necesito|necesitamos|busco|buscar|encuentra|encuentre|mu[eé]strame|donde encuentro)\s+/,"")
+    .trim();
+  if(!phrase){voiceStatus.textContent="I didn't catch that. Say a service name, or say read results.";return;}
+  if(/\b(read|red)\s+(the\s+)?results?\b/.test(phrase)||/\b(read|red)\s+(them|those)\b/.test(phrase)||phrase==="read aloud"){
+    readVoiceResults();return;
+  }
+  if(/\b(stop listening|stop voice help|turn off voice|exit voice)\b/.test(phrase)){
+    stopVoiceAndClose();voiceStatus.textContent=tr("voiceOff");return;
+  }
+  if(/^(stop speaking|be quiet|quiet)$/.test(phrase)){
+    if("speechSynthesis" in window)window.speechSynthesis.cancel();
+    voiceSpeaking=false;voiceStatus.textContent=tr("speechStopped");
+    if(voiceSessionActive)startVoiceRecognition();return;
+  }
+  const countyPhrase=phrase.replace(/\bcounty\b/g,"").trim();
+  const countyMatch=OK_COUNTIES.find(c=>normalize(c)===countyPhrase);
+  if(countyMatch){
+    setCounty(countyMatch);
+    voiceStatus.textContent=appLanguage==="es"?`Mostrando recursos del condado de ${countyMatch}.`:`Showing resources for ${countyMatch} County.`;
+    voiceSay(appLanguage==="es"?`Ahora está viendo los recursos del condado de ${countyMatch}.`:`Now showing resources for ${countyMatch} County.`);
+    return;
+  }
+  voiceSearch(spoken);
+}
+function voiceSearch(term){
+  $("resourceTab").classList.add("active");$("myTab").classList.remove("active");
+  $("resourceView").classList.remove("hidden");$("myView").classList.add("hidden");
+  const spoken=String(term||"").trim();
+  const normalize=normalizeVoice;
+  if(!spoken){
+    voiceStatus.textContent=tr("pleaseSay");
+    voiceSay(tr("pleaseSaySpeech"));return;
+  }
+  let phrase=normalize(spoken).replace(/^(please\s+)?(take me to|go to|open|show me|show|find|search for|i need|i want|look for|necesito|necesitamos|busco|buscar|encuentra|encuentre|mu[eé]strame|donde encuentro)\s+/,"").trim();
+  const exactOrgMatches=resources.filter(r=>{
+    // Only organization/title text gets exact-match priority. Category words such as
+    // “food” and “shelter” must reach the category router instead of keyword matches.
+    const names=[r.title,r.subtitle,r.subtitle_es].map(normalize);
+    return names.some(name=>name&&name===phrase);
+  });
+  if(exactOrgMatches.length){showVoiceResourceMatches(exactOrgMatches,spoken,true);return;}
+  const categoryIntents=[
+    {category:"Service Navigation",aliases:["211","service navigation","find resources","help finding services","where do i start","start here"]},
+    {category:"Emergency & Crisis",aliases:["emergency","emergencies","crisis","crisis support","mental health crisis","988","911","suicide crisis","urgent help"]},
+    {category:"Shelter & Day Services",aliases:["shelter","shelters","homeless shelter","homeless shelters","emergency shelter","overnight shelter","day shelter","place to stay","housing"]},
+    {category:"Sober Living & Recovery Housing",aliases:["sober living","sober homes","sober house","recovery housing","recovery homes","transitional recovery housing"]},
+    {category:"Food & Basic Needs",aliases:["food","food banks","food bank","food pantry","food pantries","groceries","meals","hungry","snap","food benefits","wic","coffee","clothing"]},
+    {category:"Health Care & Coverage",aliases:["health care","healthcare","health coverage","health insurance","medical insurance","doctors","clinics","sooner care","soonercare","medicaid"]},
+    {category:"Behavioral Health & Recovery",aliases:["behavioral health","mental health","counseling","addiction treatment","recovery services","substance use treatment"]},
+    {category:"Safety & Domestic Violence",aliases:["domestic violence","domestic abuse","survivor support","sexual assault","human trafficking","safety planning"]},
+    {category:"Youth Homelessness & Education",aliases:["youth homelessness","homeless youth","school help","school rights","mckinney vento","foster youth","positive tomorrows"]},
+    {category:"Child Care & Parenting Support",aliases:["child care","childcare","daycare","early childhood","parenting","home visiting","parentpro"]},
+    {category:"Family Resource Centers",aliases:["family resource center","family resource centers","resource center","resource centers","family support center"]},
+    {category:"Family & Systems Navigation",aliases:["systems of care","wraparound","care coordination","family navigation","family support network","school based support"]},
+    {category:"Family & Child Welfare Support",aliases:["child welfare","foster care","adoption","post adoption","family centered services","children's services"]},
+    {category:"Disability & Developmental Support",aliases:["disability services","developmental disabilities","early intervention","special education","soonerstart","developmental support"]},
+    {category:"Benefits & Utility Assistance",aliases:["benefits","okdhs","oklahoma dhs","dhs","oklahoma human services","state benefits","state assistance","utility","utilities","utility assistance","bill assistance","help paying bills","energy assistance","tanf","liheap"]},
+    {category:"Identification & Essential Documents",aliases:["id","ids","identification","state id","birth certificate","documents","replace documents","lost id","upward transitions"]},
+    {category:"Transportation",aliases:["transportation","bus","bus pass","ride","rides","transport","embark"]},
+    {category:"Employment & Job Training",aliases:["job","jobs","employment","work","job training","training","career help","snap works","ok snap works"]},
+    {category:"Legal & Justice Support",aliases:["legal help","lawyer","lawyers","legal aid","attorney","attorneys","eviction lawyer","child support"]},
+    {category:"Justice & Reentry Support",aliases:["reentry","re-entry","criminal justice support","diversion hub","remerge","second chances"]},
+    {category:"City Services & Street Outreach",aliases:["street outreach","city services","okc action center","action center"]},
+    {category:"Public Access & Technology",aliases:["wifi","wi-fi","internet","computers","printing","library","technology access"]},
+    {category:"Veterans",aliases:["veteran","veterans","veterans services","veteran services","homeless veterans"]},
+    {category:"Pets & Animal Support",aliases:["pets","pet food","animal support","dog food","cat food"]},
+    {category:"Native American & Tribal Resources",aliases:["native american resources","tribal resources","tribal services","indigenous resources","indigenous services","bia"]}
+  ];
+  const spanishAliases={
+   "Service Navigation":["ayuda","buscar servicios","encontrar ayuda","donde empiezo","recursos"],"Emergency & Crisis":["emergencia","emergencias","crisis","crisis de salud mental","suicidio","ayuda urgente"],"Shelter & Day Services":["refugio","refugios","albergue","albergues","vivienda","lugar para quedarse","donde dormir","sin hogar"],"Sober Living & Recovery Housing":["vivienda sobria","casa de sobriedad","recuperacion","vivienda de recuperacion"],"Food & Basic Needs":["comida","alimentos","banco de alimentos","despensa de alimentos","comida gratis","ropa","necesidades basicas"],"Health Care & Coverage":["salud","atencion medica","seguro medico","seguro de salud","medico","clinica","medicaid"],"Behavioral Health & Recovery":["salud mental","consejeria","terapia","tratamiento de adicciones","adiccion","recuperacion"],"Safety & Domestic Violence":["violencia domestica","abuso domestico","seguridad","agresion sexual"],"Youth Homelessness & Education":["jovenes sin hogar","escuela","educacion","ayuda escolar"],"Child Care & Parenting Support":["cuidado infantil","guarderia","crianza","apoyo para padres"],"Family Resource Centers":["centro de recursos familiares","centros familiares","apoyo familiar"],"Benefits & Utility Assistance":["beneficios","asistencia publica","ayuda con facturas","ayuda con luz","servicios publicos","okdhs"],"Identification & Essential Documents":["identificacion","identificacion estatal","documentos","acta de nacimiento","identificacion perdida"],"Transportation":["transporte","autobus","pase de autobus"],"Employment & Job Training":["trabajo","empleo","trabajos","capacitacion laboral"],"Legal & Justice Support":["ayuda legal","abogado","asistencia legal"],"Veterans":["veteranos","servicios para veteranos"],"Pets & Animal Support":["mascotas","comida para perros","comida para gatos"],"Native American & Tribal Resources":["recursos tribales","servicios tribales","pueblos indigenas"]
+  };
+  categoryIntents.forEach(group=>{group.aliases.push(...(spanishAliases[group.category]||[]));});
+  const categoryIntent=categoryIntents.find(group=>group.aliases.some(alias=>phrase===normalize(alias)));
+  if(categoryIntent&&resources.some(r=>resourceTabs(r).includes(categoryIntent.category))){
+    active=categoryIntent.category;voiceResultIds=null;$("search").value="";renderCats();render();
+    const count=resources.filter(r=>resourceTabs(r).includes(active)).length;
+    voiceStatus.textContent=appLanguage==="es"?`Abriendo ${catLabel(active)}. Hay ${count} recursos en esta categoría.`:`Opening ${active}. ${count} resources are listed.`;
+    voiceSay(appLanguage==="es"?`Abriendo ${catLabel(active)}. Hay ${count} recursos en esta categoría. Los verá en la pantalla. Puede decir leer resultados para escucharlos.`:`Opening ${active}. There ${count===1?"is one resource":"are "+count+" resources"} in this category. The resources are displayed on the screen. When I'm finished, you can say read results to hear them.`);
+    const firstCard=$("list").querySelector("article");if(firstCard)firstCard.scrollIntoView({behavior:"smooth",block:"start"});return;
+  }
+  const available=countyFilteredResources();
+  const orgMatches=available.filter(r=>{
+    const haystack=[r.title,r.subtitle,r.subtitle_es,...String(r.keywords||"").split(","),...String(r.keywords_es||"").split(",")].map(normalize);
+    return haystack.some(value=>value&&(value.includes(phrase)||phrase.includes(value)));
+  });
+  const matches=orgMatches.length?orgMatches:available.filter(r=>[r.title,r.subtitle,r.subtitle_es,r.description,r.description_es,r.address,r.category,r.coverage,r.coverage_es,r.keywords,r.keywords_es].join(" ").toLowerCase().includes(phrase));
+  showVoiceResourceMatches(matches,spoken,!!orgMatches.length);
+}
+function showVoiceResourceMatches(matches,spoken,organizationMatch){
+  active="All";$("search").value="";voiceResultIds=matches.map(r=>r.id);renderCats();render();
+  if(matches.length){
+    voiceStatus.textContent=appLanguage==="es"?`Encontré ${matches.length} ${matches.length===1?"recurso":"recursos"} para “${spoken}”.`:`Found ${matches.length} matching resource${matches.length===1?"":"s"} for “${spoken}”.`;
+    const list=matches.slice(0,3);
+    const spokenInfo=list.map((r,i)=>`${i+1}. ${r.title}. ${resourceText(r,"subtitle")}. ${resourceText(r,"description")}${r.phone?(appLanguage==="es"?" Teléfono: ":" Phone number: ")+r.phone+".":""}`).join(" ");
+    voiceSay(appLanguage==="es"?`${organizationMatch?"Aquí está la organización correspondiente":"Estos son los recursos correspondientes"} a ${spoken}. ${spokenInfo} Las tarjetas correspondientes aparecen en la pantalla. Cuando termine, diga leer resultados para escuchar los primeros cinco recursos.`:`${organizationMatch?"Here is the matching organization":"Here are the matching resources"} for ${spoken}. ${spokenInfo} The matching cards are displayed on the screen. When I'm finished, say read results to hear the first five matching resources.`);
+    const firstCard=$("list").querySelector("article");if(firstCard)firstCard.scrollIntoView({behavior:"smooth",block:"start"});
+  }else{
+    voiceResultIds=[];
+    render();
+    voiceStatus.textContent=appLanguage==="es"?"No encontré recursos. Diga refugio, vivienda de recuperación, comida, atención médica, OKDHS o SoonerCare.":"No matching resources. Try saying shelters, sober living, food, health care, OKDHS, or SoonerCare.";
+    voiceSay(appLanguage==="es"?"No encontré un recurso correspondiente. Diga refugio, vivienda de recuperación, comida, atención médica, OKDHS o SoonerCare.":"I could not find a matching resource. Try saying shelters, sober living, food, health care, OKDHS, or SoonerCare.");
+  }
+}
+function stopVoiceAndClose(){
+  voiceSessionActive=false;voiceSpeaking=false;clearTimeout(voiceRestartTimer);
+  if("speechSynthesis" in window)window.speechSynthesis.cancel();
+  if(voiceRecognition){const rec=voiceRecognition;voiceRecognition=null;try{rec.onend=null;rec.stop()}catch(e){}}
+  currentUtterance=null;
+  voicePanel.classList.add("hidden");
+  voiceToggle.setAttribute("aria-expanded","false");
+  voiceToggle.setAttribute("aria-pressed","false");
+  voiceToggle.textContent=tr("tapSpeak");
+}
+voiceToggle.addEventListener("click",()=>{
+  if(voiceSessionActive){
+    stopVoiceAndClose();
+    return;
+  }
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  voicePanel.classList.remove("hidden");
+  voiceToggle.setAttribute("aria-expanded","true");
+  if(!SpeechRecognition){
+    voiceStatus.textContent=tr("voiceUnsupported");
+    voiceSay("You can say a service like food, shelter, or ID, or the name of a specific organization. This browser does not support voice input, so please use the search bar or service buttons instead.");
+    voiceToggle.setAttribute("aria-pressed","false");
+    return;
+  }
+  voiceSessionActive=true;
+  voiceToggle.setAttribute("aria-pressed","true");
+  voiceToggle.textContent=tr("listening");
+  voiceStatus.textContent=appLanguage==="es"?"Le explicaré qué puede decir y luego comenzaré a escuchar.":"I'll explain what you can say, then start listening.";
+  voiceSay(appLanguage==="es"?"Puede decir comida, refugio o identificación, o el nombre de una organización. Le mostraré los recursos correspondientes. Puede hablar cuando esté listo.":"You can say things like food, shelter, or ID, or say the name of a specific organization. I'll show you the matching resources. Go ahead when you're ready.");
+});
+
+const DB="okc-my-contacts-v1";
+function loadContacts(){try{return JSON.parse(localStorage.getItem(DB)||"[]")}catch(e){return[]}}
+function saveContacts(a){localStorage.setItem(DB,JSON.stringify(a))}
+function resetForm(){$("editId").value="";["name","phone","email","address","notes"].forEach(id=>$(id).value="");$("type").selectedIndex=0}
+function openForm(c){
+ $("formWrap").classList.remove("hidden");
+ $("formTitle").textContent=c?(appLanguage==="es"?"Editar persona o servicio":"Edit person or service"):tr("formAdd");
+ $("editId").value=c?.id||"";
+ $("name").value=c?.name||"";$("type").value=c?.type||"Doctor / clinic";$("phone").value=c?.phone||"";
+ $("email").value=c?.email||"";$("address").value=c?.address||"";$("notes").value=c?.notes||"";
+ window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
+$("addBtn").onclick=()=>{resetForm();openForm()};
+$("cancelBtn").onclick=()=>{$("formWrap").classList.add("hidden");resetForm()};
+$("saveBtn").onclick=()=>{
+ const name=$("name").value.trim(); if(!name){alert(tr("enterName"));return}
+ const contacts=loadContacts(), id=$("editId").value||crypto.randomUUID();
+ const item={id,name,type:$("type").value,phone:$("phone").value.trim(),email:$("email").value.trim(),address:$("address").value.trim(),notes:$("notes").value.trim(),updated:new Date().toISOString()};
+ const i=contacts.findIndex(x=>x.id===id); if(i>=0) contacts[i]=item; else contacts.unshift(item);
+ saveContacts(contacts);$("formWrap").classList.add("hidden");resetForm();renderMy();
+};
+$("mySearch").addEventListener("input",renderMy);
+function renderMy(){
+ const q=$("mySearch").value.trim().toLowerCase();
+ const arr=loadContacts().filter(c=>!q||Object.values(c).join(" ").toLowerCase().includes(q));
+ $("myList").innerHTML=arr.length?arr.map(c=>{
+   let actions="";
+   if(c.phone) actions+=`<a href="tel:${c.phone.replace(/[^0-9+]/g,"")}">${tr("callLabel")}</a>`;
+   if(c.email) actions+=`<a class="secondary" href="mailto:${esc(c.email)}">${tr("emailLabel")}</a>`;
+   if(c.address) actions+=`<a class="secondary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}">Directions</a>`;
+   actions+=`<button class="secondary" onclick="editContact('${c.id}')">${tr("edit")}</button><button class="secondary" onclick="deleteContact('${c.id}')">${tr("delete")}</button>`;
+   return `<article class="card"><div class="sub">${esc(c.type)}</div><h2>${esc(c.name)}</h2>${c.phone?`<div class="meta"><b>${tr("phoneLabel")}</b> ${esc(c.phone)}</div>`:""}${c.email?`<div class="meta"><b>${tr("emailLabel")}</b> ${esc(c.email)}</div>`:""}${c.address?`<div class="meta"><b>${tr("addressLabel")}</b> ${esc(c.address)}</div>`:""}${c.notes?`<div class="desc"><b>${tr("notesLabel")}</b> ${esc(c.notes)}</div>`:""}<div class="actions">${actions}</div></article>`
+ }).join(""):`<div class="empty">${tr("myEmpty")}</div>`;
+}
+window.editContact=id=>{const c=loadContacts().find(x=>x.id===id);if(c)openForm(c)};
+window.deleteContact=id=>{if(confirm(tr("savedContact"))){saveContacts(loadContacts().filter(x=>x.id!==id));renderMy()}};
+
+function openReportForm(resourceName=""){
+ const form=$("reportForm");form.classList.remove("hidden");$("reportResource").value=resourceName||"";$("reportStatus").textContent="";form.scrollIntoView({behavior:"smooth",block:"start"});if(!resourceName)$("reportResource").focus();
+}
+$("list").addEventListener("click",event=>{const button=event.target.closest("[data-report-resource]");if(button)openReportForm(button.getAttribute("data-report-resource")||"")});
+$("reportSubmitBtn").addEventListener("click",()=>{
+ const resourceName=$("reportResource").value.trim(),typeLabel=$("reportType").selectedOptions[0]?.textContent||$("reportType").value,details=$("reportDetails").value.trim();
+ if(!resourceName){$("reportStatus").textContent=tr("reportNeedResource");$("reportResource").focus();return;}
+ if(!details){$("reportStatus").textContent=tr("reportNeedDetails");$("reportDetails").focus();return;}
+ const subject=tr("reportSubject")+": "+resourceName;
+ const body=(appLanguage==="es"?"Recurso u organización: ":"Resource or organization: ")+resourceName+"\n"+(appLanguage==="es"?"Tipo de informe: ":"Report type: ")+typeLabel+"\n\n"+(appLanguage==="es"?"Detalles: ":"Details: ")+details+"\n\n"+(appLanguage==="es"?"Enviado desde OKC Resource Connect.":"Submitted from OKC Resource Connect.");
+ const mailto="mailto:okcresource@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+ $("reportForm").classList.add("hidden");$("reportStatus").textContent="";window.location.href=mailto;
+});
+
+$("legalToggle").addEventListener("click",()=>{
+ const panel=$("legalPanel"),opening=panel.classList.contains("hidden");
+ panel.classList.toggle("hidden",!opening);$("legalToggle").setAttribute("aria-expanded",String(opening));
+ if(opening)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+populateCounties();populateCities();updateCountyStatus();
+$("countySelect").addEventListener("change",e=>setCounty(e.target.value));
+$("citySelect").addEventListener("change",e=>setCity(e.target.value));
+$("languageSelect").value=appLanguage;$("languageSelect").addEventListener("change",e=>{if(voiceSessionActive)stopVoiceAndClose();applyLanguage(e.target.value)});
+applyLanguage(appLanguage);
+$("reportForm").classList.add("hidden");
+fetch("resources.json",{cache:"no-store"}).then(async r=>{
+  if(!r.ok) throw new Error("resources.json could not be loaded");
+  const x=await r.json();
+  resources=Array.isArray(x)?x:[];
+  populateCities();updateCountyStatus();renderCats();render();
+  // Ask for location as the app opens; when granted, keep the city/county synced while the app is open.
+  detectDeviceCity();
+}).catch(err=>{
+  console.error(err);
+  $("list").innerHTML='<div class="empty">Resource data could not be loaded. Make sure <b>resources.json</b> is in the same folder as <b>index.html</b>.</div>';
+});
+
+async function applyDetectedLocation(latitude,longitude){
+  const resp=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}&localityLanguage=en`,{headers:{"Accept":"application/json"}});
+  if(!resp.ok)throw new Error("Location lookup failed");
+  const data=await resp.json();
+  const address=data.address||{};
+  const detectedCity=address.city||address.locality||address.town||address.village||data.locality||"";
+  const detectedCountyRaw=address.county||"";
+  const detectedCounty=detectedCountyRaw.replace(/\s+County$/i,"").trim();
+  const countyMatch=OK_COUNTIES.find(c=>c.toLowerCase()===detectedCounty.toLowerCase());
+  if(countyMatch) selectedCounty=countyMatch;
+  if(detectedCity){
+    selectedCity=detectedCity;
+    voiceResultIds=null;
+    $("search").value="";
+    populateCounties();populateCities();
+    if(![...$("citySelect").options].some(o=>o.value===detectedCity)){
+      const opt=document.createElement("option");opt.value=detectedCity;opt.textContent=detectedCity;$("citySelect").appendChild(opt);
+    }
+    $("citySelect").value=detectedCity;
+  }
+  updateCountyStatus();
+}
+function startLocationWatch(){
+  if(!navigator.geolocation){
+    $("locationStatus").textContent=appLanguage==="es"?"📍 La ubicación no es compatible con este navegador.":"📍 Location is not supported by this browser.";
+    return;
+  }
+  $("locationStatus").textContent=appLanguage==="es"?"📍 Solicitando permiso de ubicación…":"📍 Requesting location permission…";
+  locationWatchId=navigator.geolocation.watchPosition(async pos=>{
+    const {latitude,longitude}=pos.coords;
+    if(userLocation && haversineMiles([userLocation.lat,userLocation.lng],[latitude,longitude])<0.5){return;}
+    locationBusy=true;
+    userLocation={lat:latitude,lng:longitude,distanceTo:r=>haversineMiles([latitude,longitude],r)};
+    try{
+      await applyDetectedLocation(latitude,longitude);
+      locationBusy=false;
+      $("locationStatus").textContent=appLanguage==="es"?`📍 Ubicación activa: ${selectedCity}${selectedCounty!=="ALL"?`, ${selectedCounty} County`:""}`:`📍 Location active: ${selectedCity}${selectedCounty!=="ALL"?`, ${selectedCounty} County`:""}`;
+      if(locationMode){renderCats();render();if(active==="Shelter & Day Services")renderTransportationCompanion();}
+    }catch(e){
+      locationBusy=false;
+      $("locationStatus").textContent=appLanguage==="es"?"📍 Ubicación activa; no se pudo actualizar la ciudad automáticamente.":"📍 Location active; city could not be updated automatically.";
+      if(locationMode){renderCats();render();}
+    }
+  },err=>{
+    locationBusy=false;
+    const msg=err&&err.code===1
+      ? (appLanguage==="es"?"📍 Permiso de ubicación no concedido. Puede usar el selector de ciudad.":"📍 Location permission was not granted. You can use the city selector.")
+      : (appLanguage==="es"?"📍 No se pudo obtener la ubicación. Puede usar el selector de ciudad.":"📍 Location could not be determined. You can use the city selector.");
+    $("locationStatus").textContent=msg;
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:120000});
+}
+function detectDeviceCity(){startLocationWatch();}
+
+if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});}
+</script>
+</body>
+</html>
